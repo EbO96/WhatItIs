@@ -18,8 +18,6 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_add_question.*
 import kotlinx.android.synthetic.main.question_item.view.*
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -27,7 +25,6 @@ import whatitis.ebo96.pl.R
 import whatitis.ebo96.pl.data.QuestionsViewModel
 import whatitis.ebo96.pl.model.Answer
 import whatitis.ebo96.pl.model.Question
-import whatitis.ebo96.pl.network.BackupService
 import whatitis.ebo96.pl.util.MySimpleAdapter
 import whatitis.ebo96.pl.util.adapter
 import java.util.*
@@ -37,8 +34,6 @@ class MainActivity : AppCompatActivity(), ActivityInteractions, LifecycleFragmen
         QuizGameCallback, QuizCallback {
 
     val questionsViewModel: QuestionsViewModel by inject { parametersOf(this) }
-
-    val backupService: BackupService by inject()
 
     private var quizQuestions: ArrayList<Pair<Question, ArrayList<Answer>>> = ArrayList()
 
@@ -59,11 +54,6 @@ class MainActivity : AppCompatActivity(), ActivityInteractions, LifecycleFragmen
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        launch(UI) {
-            val testResult = async { backupService.test().blockingGet().response }.await()
-            Toast.makeText(this@MainActivity, testResult, Toast.LENGTH_SHORT).show()
-        }
 
         setSupportActionBar(toolbar)
         supportActionBar?.title = getString(R.string.main_screen_title)

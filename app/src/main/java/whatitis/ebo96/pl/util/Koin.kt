@@ -7,8 +7,6 @@ import org.koin.dsl.module.module
 import whatitis.ebo96.pl.data.QuestionsRepository
 import whatitis.ebo96.pl.data.QuestionsViewModel
 import whatitis.ebo96.pl.database.QuestionsDatabase
-import whatitis.ebo96.pl.network.BackupService
-import whatitis.ebo96.pl.network.MyRetrofit
 
 val appModule = module {
 
@@ -20,10 +18,6 @@ val appModule = module {
                 .build()
                 .dao()
     }
-
-    single { MyRetrofit() }
-
-    single { MyRetrofit().getService("http://127.0.0.1:3000/", BackupService::class.java) }
 
     single { QuestionsRepository(androidApplication().applicationContext, get()) }
 
