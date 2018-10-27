@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.content.Context
 import whatitis.ebo96.pl.database.QuestionDao
 import whatitis.ebo96.pl.model.Question
+import whatitis.ebo96.pl.model.QuizScore
 
 class QuestionsRepository(private val ctx: Context, private val questionDao: QuestionDao) {
 
@@ -21,4 +22,7 @@ class QuestionsRepository(private val ctx: Context, private val questionDao: Que
 
     fun getAllQuestions(): LiveData<List<Question>> = questionDao.getQuestions()
 
+    fun saveQuizScore(quizScore: QuizScore) = questionDao.insertQuizScore(quizScore)
+
+    fun getQuizScores(): LiveData<List<QuizScore>> = questionDao.getQuizScores()
 }

@@ -5,7 +5,11 @@ import android.arch.lifecycle.ViewModel
 import android.content.Intent
 import android.graphics.Bitmap
 import android.widget.ImageView
+import kotlinx.coroutines.experimental.DefaultDispatcher
+import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.withContext
 import whatitis.ebo96.pl.model.Question
+import whatitis.ebo96.pl.model.QuizScore
 import whatitis.ebo96.pl.view.ActivityInteractions
 import whatitis.ebo96.pl.view.MainActivity
 
@@ -65,4 +69,10 @@ class QuestionsViewModel(private val activityInteractions: ActivityInteractions,
 
         activityInteractions.get().startActivityForResult(intent, MainActivity.PICK_PHOTO_CODE)
     }
+
+    fun saveQuizScore(quizScore: QuizScore) {
+        questionsRepository.saveQuizScore(quizScore)
+    }
+
+    fun getQuizScores(): LiveData<List<QuizScore>> = questionsRepository.getQuizScores()
 }

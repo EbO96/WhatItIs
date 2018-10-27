@@ -25,6 +25,7 @@ import whatitis.ebo96.pl.R
 import whatitis.ebo96.pl.data.QuestionsViewModel
 import whatitis.ebo96.pl.model.Answer
 import whatitis.ebo96.pl.model.Question
+import whatitis.ebo96.pl.model.QuizScore
 import whatitis.ebo96.pl.util.MySimpleAdapter
 import whatitis.ebo96.pl.util.adapter
 import java.util.*
@@ -131,6 +132,14 @@ class MainActivity : AppCompatActivity(), ActivityInteractions, LifecycleFragmen
 
             menu?.setGroupVisible(R.id.quizGroup, questionsList != null && questionsList.size > 1)
         })
+    }
+
+    private fun showQuizScores(score: QuizScore) {
+        val quizScoresFragment = QuizScoresFragment.newInstance(score)
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.add(R.id.container, quizScoresFragment, QuizScoresFragment::class.java.name)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     private fun resolvePhotos() {
@@ -243,12 +252,15 @@ class MainActivity : AppCompatActivity(), ActivityInteractions, LifecycleFragmen
 
     override fun checkQuiz() {
         var points = 0
+        var maxPoints = quizQuestions.size
 
         quizQuestions.forEach { pair ->
             pair.second.firstOrNull { answer -> answer.correct && answer.selected }?.also { points++ }
         }
 
-        Toast.makeText(this@MainActivity, "Score: $points/${questions.size}", Toast.LENGTH_SHORT).show()
+        val quizScore = QuizScore(System.currentTimeMillis(), points, maxPoints)
+        //Show quiz score
+        showQuizScores(quizScore)
     }
 
     override fun get(): AppCompatActivity = this
@@ -265,6 +277,9 @@ class MainActivity : AppCompatActivity(), ActivityInteractions, LifecycleFragmen
             }
             is QuizFragment -> {
                 LifecycleFragment.setToolbar(this, true, getString(R.string.quiz))
+            }
+            is QuizScoresFragment -> {
+                LifecycleFragment.setToolbar(this, true, getString(R.string.scores))
             }
 
         }

@@ -17,4 +17,7 @@
     <string name="deleted">Usunięto</string>
     <string name="undo">Cofnij</string>
     <string name="empty_list">Twoja lista jest pusta</string>
+    <string name="scores">Wyniki</string>
+    <string name="back_to_quiz">Wróć do pytań</string>
+    <string name="your_score">Twój wynik</string>
 </resources>

@@ -3,6 +3,7 @@ package whatitis.ebo96.pl.database
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
 import whatitis.ebo96.pl.model.Question
+import whatitis.ebo96.pl.model.QuizScore
 
 @Dao()
 interface QuestionDao {
@@ -18,4 +19,11 @@ interface QuestionDao {
 
     @Query("SELECT * FROM table_questions")
     fun getQuestions(): LiveData<List<Question>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertQuizScore(quizScore: QuizScore)
+
+    @Query("SELECT * FROM quizscore")
+    fun getQuizScores(): LiveData<List<QuizScore>>
+
 }
