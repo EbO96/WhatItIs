@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/darker_gray"
     android:orientation="vertical"
-    tools:context=".view.MainActivity">
+    tools:context=".ui.activity.MainActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -26,29 +26,27 @@
         android:layout_height="match_parent">
 
         <android.support.design.widget.CoordinatorLayout
-            android:layout_width="match_parent"
             android:id="@+id/coordinatorLayout"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/photosRecycler"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-            </android.support.v7.widget.RecyclerView>
+                <FrameLayout
+                    android:id="@+id/activity_main_screen_question_list_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/addPhotoButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_margin="16dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:src="@drawable/ic_add"
-                app:fabSize="normal" />
+                <FrameLayout
+                    android:id="@+id/activity_main_screen_set_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
 
         </android.support.design.widget.CoordinatorLayout>
     </FrameLayout>

@@ -1,17 +1,16 @@
-package whatitis.ebo96.pl.data
+package whatitis.ebo96.pl.ui.presenter
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import android.content.Intent
 import android.graphics.Bitmap
 import android.widget.ImageView
-import kotlinx.coroutines.experimental.DefaultDispatcher
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.withContext
+import whatitis.ebo96.pl.data.QuestionInterface
+import whatitis.ebo96.pl.data.QuestionsRepository
 import whatitis.ebo96.pl.model.Question
 import whatitis.ebo96.pl.model.QuizScore
 import whatitis.ebo96.pl.view.ActivityInteractions
-import whatitis.ebo96.pl.view.MainActivity
+import whatitis.ebo96.pl.ui.activity.MainActivity
 
 class QuestionsViewModel(private val activityInteractions: ActivityInteractions,
                          private val questionsRepository: QuestionsRepository) : ViewModel(), QuestionInterface {
@@ -53,26 +52,14 @@ class QuestionsViewModel(private val activityInteractions: ActivityInteractions,
      */
     private fun performPhotoSearch() {
 
-        // ACTION_OPEN_DOCUMENT is the intent to choose a file via the system's file
-        // browser.
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-            // Filter to only show results that can be "opened", such as a
-            // file (as opposed to a list of contacts or timezones)
+
             addCategory(Intent.CATEGORY_OPENABLE)
 
-            // Filter to show only images, using the image MIME data type.
-            // If one wanted to search for ogg vorbis files, the type would be "audio/ogg".
-            // To search for all documents available via installed storage providers,
-            // it would be "*/*".
             type = "image/*"
         }
 
         activityInteractions.get().startActivityForResult(intent, MainActivity.PICK_PHOTO_CODE)
     }
 
-    fun saveQuizScore(quizScore: QuizScore) {
-        questionsRepository.saveQuizScore(quizScore)
-    }
-
-    fun getQuizScores(): LiveData<List<QuizScore>> = questionsRepository.getQuizScores()
 }

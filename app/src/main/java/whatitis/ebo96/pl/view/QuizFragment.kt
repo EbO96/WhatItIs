@@ -32,11 +32,6 @@ class QuizFragment : LifecycleFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        ids = savedInstanceState?.getLongArray(IDS)
-                ?: quizCallback?.getQuizQuestions()
-                ?.map { pair -> pair.first.questionId }
-                ?.toLongArray()
-                ?: longArrayOf()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

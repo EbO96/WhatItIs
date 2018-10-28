@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/question_item_root_card"
     style="@style/QuestionItemStyle"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/card_color">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -13,36 +15,36 @@
             android:id="@+id/photoImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="0dp"
-            android:padding="8dp"
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
             android:contentDescription="@null"
+            android:padding="8dp"
             android:src="@drawable/ic_launcher_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/descriptionTextView"
+            android:id="@+id/question_item_description_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintStart_toStartOf="@+id/question_item_description"
+            app:layout_constraintTop_toBottomOf="@+id/question_item_description" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/question_item_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/description"
             android:textAppearance="@style/TextAppearance.Design.Hint"
             app:layout_constraintEnd_toEndOf="parent"

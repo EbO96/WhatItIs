@@ -1,4 +1,4 @@
-package whatitis.ebo96.pl.view
+package whatitis.ebo96.pl.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -12,6 +12,8 @@ import whatitis.ebo96.pl.model.Answer
 import whatitis.ebo96.pl.model.Question
 import whatitis.ebo96.pl.util.forEach
 import whatitis.ebo96.pl.util.hide
+import whatitis.ebo96.pl.view.LifecycleFragment
+import whatitis.ebo96.pl.view.QuizGameCallback
 
 class QuizQuestionFragment : LifecycleFragment() {
 

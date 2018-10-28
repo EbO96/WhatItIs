@@ -22,7 +22,4 @@ class QuestionsRepository(private val ctx: Context, private val questionDao: Que
 
     fun getAllQuestions(): LiveData<List<Question>> = questionDao.getQuestions()
 
-    fun saveQuizScore(quizScore: QuizScore) = questionDao.insertQuizScore(quizScore)
-
-    fun getQuizScores(): LiveData<List<QuizScore>> = questionDao.getQuizScores()
 }

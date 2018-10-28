@@ -8,7 +8,8 @@ import whatitis.ebo96.pl.R
 
 class MySimpleAdapter<T>(private val noItemsContainer: ViewGroup,
                          private val item: Int,
-                         private val itemListener: ((item: T) -> Unit)? = null,
+                         private val click: ((item: T, position: Int) -> Unit)? = null,
+                         private val longClick: ((item: T) -> Unit)? = null,
                          private val onSimpleHolder: ((item: T, view: View) -> Unit)? = null) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val noItemsScreen =
@@ -31,6 +32,7 @@ class MySimpleAdapter<T>(private val noItemsContainer: ViewGroup,
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        @Suppress("UNCHECKED_CAST")
         (holder as? BindViewHolder<T>)?.onBind(items[position])
     }
 
@@ -42,7 +44,11 @@ class MySimpleAdapter<T>(private val noItemsContainer: ViewGroup,
         override fun onBind(item: T) {
             itemView.apply {
                 setOnClickListener {
-                    itemListener?.invoke(items[position])
+                    click?.invoke(items[position], position)
+                }
+                setOnLongClickListener {
+                    longClick?.invoke(items[position])
+                    true
                 }
                 onSimpleHolder?.invoke(item, itemView)
             }
@@ -50,12 +56,12 @@ class MySimpleAdapter<T>(private val noItemsContainer: ViewGroup,
     }
 }
 
-fun <T> RecyclerView.adapter(item: Int, items: ArrayList<T>, noItemsContainer: ViewGroup, spans: Int = 1, orientation: Int = RecyclerView.VERTICAL, decoration: Boolean = false, viewHolder: ((item: T, view: View) -> Unit)? = null, click: ((item: T) -> Unit)? = null) = this.let {
+fun <T> RecyclerView.adapter(item: Int, items: ArrayList<T>, noItemsContainer: ViewGroup, spans: Int = 1, orientation: Int = RecyclerView.VERTICAL, decoration: Boolean = false, viewHolder: ((item: T, view: View) -> Unit)? = null, click: ((item: T, position: Int) -> Unit)? = null, longClick: ((item: T) -> Unit)? = null): MySimpleAdapter<T> = this.let {
     itemAnimator = DefaultItemAnimator()
 
     layoutManager = if (spans == 1) LinearLayoutManager(this.context, orientation, false) else GridLayoutManager(context, spans)
 
-    MySimpleAdapter(noItemsContainer, item, click, viewHolder).apply {
+    val adapter = MySimpleAdapter(noItemsContainer, item, click, longClick, viewHolder).apply {
         this@adapter.adapter = this
         this.items = items
     }
@@ -63,4 +69,5 @@ fun <T> RecyclerView.adapter(item: Int, items: ArrayList<T>, noItemsContainer: V
         val dividerItemDecoration = DividerItemDecoration(this.context, orientation)
         addItemDecoration(dividerItemDecoration)
     }
+    adapter
 }

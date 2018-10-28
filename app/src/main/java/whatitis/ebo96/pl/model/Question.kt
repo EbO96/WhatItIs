@@ -1,47 +1,23 @@
 package whatitis.ebo96.pl.model
 
+import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.Ignore
 import android.arch.persistence.room.PrimaryKey
 import android.graphics.Bitmap
-import android.os.Parcel
-import android.os.Parcelable
 
-@Entity(tableName = "table_questions")
-class Question(
-        var description: String,
-        var questionId: Long) : Parcelable {
-
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
+@Entity(tableName = "questions")
+class Question(@ColumnInfo(name = "description") var description: String) {
 
     @Ignore
     var photo: Bitmap? = null
 
-    constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readLong()) {
-        id = parcel.readInt()
-    }
+    @ColumnInfo(name = "photoId")
+    lateinit var photoId: String
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(description)
-        parcel.writeLong(questionId)
-        parcel.writeInt(id)
-    }
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0
 
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Question> {
-        override fun createFromParcel(parcel: Parcel): Question {
-            return Question(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Question?> {
-            return arrayOfNulls(size)
-        }
-    }
-
+    @ColumnInfo(name = "selected")
+    var selected: Boolean = false
 }

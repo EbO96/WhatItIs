@@ -4,7 +4,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="photo_description">Co jest na zdjęciu?</string>
-    <string name="main_screen_title">Twoja lista</string>
+    <string name="your_list">Twoja lista</string>
     <string name="add_question">Dodaj pytanie</string>
     <string name="edit_question">Edytuj pytanie</string>
     <string name="save">Zapisz</string>
@@ -20,4 +20,8 @@
     <string name="scores">Wyniki</string>
     <string name="back_to_quiz">Wróć do pytań</string>
     <string name="your_score">Twój wynik</string>
+    <string name="set">Zestawy</string>
+    <string name="delete">Usuń</string>
+    <string name="cancel">Anuluj</string>
+    <string name="delete_all">Usuń wszystko</string>
 </resources>

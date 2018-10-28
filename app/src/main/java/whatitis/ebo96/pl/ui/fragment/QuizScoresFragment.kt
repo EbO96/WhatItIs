@@ -1,4 +1,4 @@
-package whatitis.ebo96.pl.view
+package whatitis.ebo96.pl.ui.fragment
 
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
@@ -10,6 +10,7 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.fragment_quiz_scores.*
 import whatitis.ebo96.pl.R
 import whatitis.ebo96.pl.model.QuizScore
+import whatitis.ebo96.pl.view.LifecycleFragment
 
 class QuizScoresFragment : LifecycleFragment() {
 

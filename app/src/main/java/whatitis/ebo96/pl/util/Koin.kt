@@ -5,7 +5,7 @@ import org.koin.android.ext.koin.androidApplication
 import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 import whatitis.ebo96.pl.data.QuestionsRepository
-import whatitis.ebo96.pl.data.QuestionsViewModel
+import whatitis.ebo96.pl.ui.presenter.QuestionsViewModel
 import whatitis.ebo96.pl.database.QuestionsDatabase
 
 val appModule = module {
